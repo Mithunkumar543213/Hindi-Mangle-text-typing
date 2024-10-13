@@ -39,11 +39,20 @@
         /* Ensures mobile responsiveness */
         @media (max-width: 600px) {
             textarea {
-                height: 50vh;
+                height: 80vh;
                 font-size: 16px;
             }
             h1 {
-                font-size: 1.25rem;
+                font-size: 0.5rem;
+            }
+        }
+        @media (orientation: landscape) and (max-width: 600px) {
+            textarea {
+                height: 60vh; /* Reduced height for landscape */
+                font-size: 14px; /* Smaller font size for landscape */
+            }
+            h1 {
+                font-size: 0.6rem; /* Smaller heading for landscape */
             }
         }
     </style>
