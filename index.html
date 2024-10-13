@@ -29,7 +29,7 @@
             height: 60vh; /* Dynamic height for mobile devices */
             padding: 10px;
             font-size: 18px;
-            font-family: 'Mangal', 'Devanagari', sans-serif;
+            font-family: 'Mangal', 'Devanagari', sans-serif; /* Ensures Mangal font */
             border: 1px solid #ccc;
             border-radius: 4px;
             box-sizing: border-box;
@@ -39,11 +39,11 @@
         /* Ensures mobile responsiveness */
         @media (max-width: 600px) {
             textarea {
-                height: 80vh;
+                height: 50vh;
                 font-size: 16px;
             }
             h1 {
-                font-size: 0.5rem;
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -58,23 +58,20 @@
 <script>
     // Map of key codes to Mangal script characters (Inscript-like layout)
     const hindiKeyMap = {
-        // Vowels
-        'a': 'ो', 'A': 'ओ', 'i': 'ि', 'I': 'ई', 'u': 'ु', 'U': 'ऊ',
-        'e': 'े', 'E': 'ऐ', 'o': 'ो', 'O': 'औ', 'O': 'ू',
-        // Consonants
-        'k': 'क', 'K': 'ख', 'g': 'ग', 'G': 'घ', 'c': 'च', 'C': 'छ', 
-        'j': 'ज', 'J': 'झ', 'T': 'ट', 'D': 'ड', 'N': 'ण', 't': 'त', 
-        'd': 'द', 'n': 'न', 'p': 'प', 'P': 'फ', 'b': 'ब', 'B': 'भ', 
-        'm': 'म', 'y': 'य', 'r': 'र', 'l': 'ल', 'L': 'ळ', 'v': 'व', 
-        'S': 'श', 's': 'स', 'H': 'ह', 'x': 'क्ष', 'q': 'त्र', 'z': 'ज्ञ',
-        // Special characters
-        'f': 'फ', 'F': 'फ़', 'w': 'व', 'W': 'व', 'X': 'ष', 'Z': 'ज़',
-        // Matras (vowel signs)
-        'M': 'ं', 'H': 'ः', 'N': 'ँ', 
-        // Conjuncts and half-forms
-        'h': 'ह', 
-        // Diacritics and signs
-        'X': '़', 'R': '्र', 
+       //A to L
+       'a': 'ो', 'A': 'ओ','s': 'े', 'S': 'ए', 'd': '्', 'D': 'अ', 'f': 'ि', 'F': 'इ',
+         'g': 'ु', 'G': 'उ', 'h': 'प','H': 'फ','j': 'र','J': 'ऱ','k': 'क','K': 'ख','l': 'त','L': 'थ',
+
+        // Q to P
+        'q': 'ौ', 'Q': 'औ','w': 'ै', 'W': 'ऐ', 'e': 'ा', 'E': 'आ', 'r': 'ी', 'R': 'ई',
+         't': 'ू', 'T': 'ऊ', 'y': 'ब','Y': 'भ','u': 'ह','U': 'ङ','i': 'ग','I': 'घ','o': 'द','O': 'ध','p': 'ज','P': 'झ',
+
+        // Z to Z
+        
+        'z': '', 'Z': '','x': 'ं', 'X': 'ँ', 'c': 'म', 'C': 'ण', 'v': 'न', 'V': '',
+         'b': 'व', 'B': '', 'n': 'ल','N': 'ळ','m': 'स','M': 'श',
+        
+      
         // Numbers
         '1': '१', '2': '२', '3': '३', '4': '४', '5': '५', '6': '६', '7': '७', '8': '८', '9': '९', '0': '०',
         // Other signs
@@ -90,9 +87,16 @@
         if (hindiKeyMap[key]) {
             event.preventDefault();
 
-            // Insert the mapped Hindi character
             const hindiCharacter = hindiKeyMap[key];
-            insertAtCursor(hindiTextarea, hindiCharacter);
+            const currentText = hindiTextarea.value;
+            const lastCharacter = currentText[currentText.length - 1]; // Get the last character
+
+            // If the last character is the same as the current, add a space before the character
+            if (lastCharacter === hindiCharacter) {
+                insertAtCursor(hindiTextarea, ' ' + hindiCharacter);
+            } else {
+                insertAtCursor(hindiTextarea, hindiCharacter);
+            }
         }
     });
 
